@@ -54,6 +54,12 @@ export function NodeInfo() {
         ? "bg-amber-100 text-amber-800"
         : "bg-red-100 text-red-800"
 
+  // Helper to format numbers to 2 decimal places
+  const format2 = (val: any) => {
+    const num = Number(val)
+    return isNaN(num) ? "N/A" : num.toFixed(2)
+  }
+
   return (
     <Card className="h-[600px] overflow-auto">
       <CardHeader className="pb-3">
@@ -79,7 +85,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">Motor Temperature</p>
-                    <h4 className="text-2xl font-bold">{thingSpeakData?.field1 || "N/A"}°C</h4>
+                    <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field1)}°C</h4>
                   </div>
                 </CardContent>
               </Card>
@@ -90,7 +96,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">Ambient Temperature</p>
-                    <h4 className="text-2xl font-bold">{thingSpeakData?.field2 || "N/A"}°C</h4>
+                    <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field2)}°C</h4>
                   </div>
                 </CardContent>
               </Card>
@@ -101,7 +107,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear X</p>
-                    <h4 className="text-2xl font-bold">{thingSpeakData?.field3 || "N/A"}</h4>
+                    <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field3)} m/s²</h4>
                   </div>
                 </CardContent>
               </Card>
@@ -112,7 +118,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear Y</p>
-                    <h4 className="text-2xl font-bold">{thingSpeakData?.field4 || "N/A"}</h4>
+                    <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field4)} m/s²</h4>
                   </div>
                 </CardContent>
               </Card>
@@ -123,7 +129,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear Z</p>
-                    <h4 className="text-2xl font-bold">{thingSpeakData?.field5 || "N/A"}</h4>
+                    <h4 className="text-2xl font-bold">{format2(Number(thingSpeakData?.field5) - 9.80)} m/s²</h4>
                   </div>
                 </CardContent>
               </Card>
@@ -135,7 +141,7 @@ export function NodeInfo() {
                   <div>
                     <p className="text-sm font-medium">Motor Current</p>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-2xl font-bold">{thingSpeakData?.field6 || "N/A"}A</h4>
+                      <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field6)}A</h4>
                       {Number(thingSpeakData?.field6) > 0 ? (
                         <span className="inline-block px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-300"> Motor ON</span>
                       ) : (
@@ -159,6 +165,7 @@ export function NodeInfo() {
             </div>
           </TabsContent>
         </Tabs>
+        <div className="mt-4 text-sm font-medium">Node List: IIIT-Hyderabad</div>
       </CardContent>
     </Card>
   )
