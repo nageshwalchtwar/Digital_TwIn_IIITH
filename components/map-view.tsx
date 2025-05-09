@@ -59,9 +59,9 @@ export function MapView() {
     }
 
     return () => {
-      if (map) {
-        map.remove()
-      }
+      // if (map) {
+      //   map.remove()
+      // }
     }
   }, [])
 
