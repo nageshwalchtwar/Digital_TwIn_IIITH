@@ -2,18 +2,15 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { BarChart2, LogOut, PlayCircle, Moon, Sun } from "lucide-react"
+import { BarChart2, PlayCircle, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
+import { UserAccountNav } from "@/components/user-account-nav"
+import { mockUser } from "@/components/welcome-header"
 
 export function DashboardNav() {
   const pathname = usePathname()
   const router = useRouter()
   const { setTheme, theme } = useTheme()
-
-  const handleLogout = () => {
-    // In a real app, you would clear auth tokens/cookies here
-    router.push("/")
-  }
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
@@ -58,14 +55,7 @@ export function DashboardNav() {
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </Button>
 
-          <Button
-            variant="ghost"
-            className="gap-2 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-            onClick={handleLogout}
-          >
-            <LogOut size={18} />
-            <span className="hidden md:inline">Logout</span>
-          </Button>
+          <UserAccountNav user={mockUser} />
         </nav>
       </div>
     </header>

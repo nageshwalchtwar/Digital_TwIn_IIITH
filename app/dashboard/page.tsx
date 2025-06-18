@@ -4,10 +4,14 @@ const MapView = dynamic(() => import("@/components/map-view").then(mod => mod.Ma
 import { NodeInfo } from "@/components/node-info"
 import { AlertPanel } from "@/components/alert-panel"
 import { ThingSpeakPlots } from "@/components/thingspeak-plots"
+import { WelcomeHeader } from "@/components/welcome-header"
 
-export default function DashboardPage() {
+export default function DashboardPage() {  
   return (
     <div className="space-y-6 p-6 max-w-7xl mx-auto">
+      {/* Welcome section */}
+      <WelcomeHeader />
+    
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="w-full lg:w-1/2">
           <div className="bg-gradient-to-tr from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-2">
