@@ -60,7 +60,7 @@ export function ThingSpeakPlots() {
                 const vibrationAmplitude = Math.sqrt(x * x + y * y + z * z)
 
                 return {
-                    time: new Date(feed.created_at).toLocaleTimeString(),
+                    time: new Date(feed.created_at).toISOString().substring(11, 16), // HH:mm
                     temperature: feed.field1 || 0,
                     ambientTemperature: feed.field2 || 0,
                     motorCurrent: feed.field3 || 0,
@@ -68,7 +68,14 @@ export function ThingSpeakPlots() {
                 }
             })
 
-            setData(processedData)
+            // Downsample data for cleaner plots (e.g., show at most 48 points, every 30 minutes)
+            let downsampledData = processedData
+            const maxPoints = 48
+            if (processedData.length > maxPoints) {
+                const step = Math.ceil(processedData.length / maxPoints)
+                downsampledData = processedData.filter((_, idx) => idx % step === 0)
+            }
+            setData(downsampledData)
             setLastUpdated(new Date())
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred')
@@ -269,4 +276,4 @@ export function ThingSpeakPlots() {
             </div>
         </div>
     )
-} 
+}

@@ -5,11 +5,14 @@ import { FaThermometerHalf, FaExclamationTriangle, FaBolt, FaArrowsAlt } from "r
 import { useNodes } from "../context/NodeContext"
 import { useThingSpeak } from "../context/ThingSpeakContext"
 import { Link } from "react-router-dom"
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import { ThingSpeakPlots } from "@/components/thingspeak-plots"
 
 const NodeInfo = () => {
   const { getSelectedNode } = useNodes()
   const { getNodeDataFromThingSpeak, loading } = useThingSpeak()
   const [activeTab, setActiveTab] = useState("overview")
+  const [plotsOpen, setPlotsOpen] = useState(false)
 
   const selectedNode = getSelectedNode()
   const thingSpeakData = selectedNode ? getNodeDataFromThingSpeak(selectedNode._id) : null
@@ -65,6 +68,20 @@ const NodeInfo = () => {
         <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColor}`}>
           {selectedNode.status.charAt(0).toUpperCase() + selectedNode.status.slice(1)}
         </span>
+        <Dialog open={plotsOpen} onOpenChange={setPlotsOpen}>
+          <DialogTrigger asChild>
+            <button
+              className="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => setPlotsOpen(true)}
+            >
+              Plots
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-w-5xl w-full">
+            <DialogTitle>Sensor Data Plots (Last 24 Hours)</DialogTitle>
+            <ThingSpeakPlots />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="p-4">

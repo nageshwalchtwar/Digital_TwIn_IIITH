@@ -3,10 +3,10 @@
 
 export const THINGSPEAK_CONFIG = {
     // Your ThingSpeak Channel ID
-    CHANNEL_ID: process.env.NEXT_PUBLIC_THINGSPEAK_CHANNEL_ID || "YOUR_CHANNEL_ID",
+    CHANNEL_ID: "2293900",
 
     // Your ThingSpeak Read API Key
-    API_KEY: process.env.NEXT_PUBLIC_THINGSPEAK_API_KEY || "YOUR_API_KEY",
+    API_KEY: "SMXU76RXPC1UV049",
 
     // Field mappings for your ThingSpeak channel
     FIELDS: {
@@ -22,7 +22,7 @@ export const THINGSPEAK_CONFIG = {
     UPDATE_INTERVAL: 5 * 60 * 1000,
 
     // Number of data points to fetch (max 8000 for free accounts)
-    MAX_RESULTS: 100
+    MAX_RESULTS: 1440 // 1 day of data at 1-min intervals
 }
 
 // Helper function to get ThingSpeak API URL
@@ -40,4 +40,4 @@ export function getThingSpeakUrl(startDate?: Date, endDate?: Date) {
     }
 
     return url
-} 
+}
