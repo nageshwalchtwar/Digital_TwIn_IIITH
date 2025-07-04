@@ -25,13 +25,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ThingSpeak Data Plots */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-200">Sensor Data (Last 24 Hours)</h2>
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg p-4">
-          <ThingSpeakPlots />
-        </div>
-      </div>
+
 
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 rounded-lg shadow-lg">
         <AlertPanel />

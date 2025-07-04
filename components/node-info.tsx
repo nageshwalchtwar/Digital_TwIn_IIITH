@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useNodeStore } from "@/lib/node-store"
-import { Activity, AlertTriangle, Battery, Thermometer, Zap } from "lucide-react"
+import { Activity, AlertTriangle, Battery, Thermometer, Zap, TrendingUp, TrendingDown, Gauge, Waves } from "lucide-react"
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { ThingSpeakPlots } from "@/components/thingspeak-plots"
 
@@ -67,10 +67,12 @@ export function NodeInfo() {
     <Card className="h-[600px] overflow-auto border-0 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm">
       <CardHeader className="pb-3 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 border-b">
         <div className="flex items-center justify-between gap-2">
-          <CardTitle className="text-slate-800 dark:text-slate-100">{selectedNode.name}</CardTitle>
-          <Badge className={`${statusColor} shadow-sm`}>
-            {selectedNode.status.charAt(0).toUpperCase() + selectedNode.status.slice(1)}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-slate-800 dark:text-slate-100">{selectedNode.name}</CardTitle>
+            <Badge className={`${statusColor} shadow-sm`}>
+              {selectedNode.status.charAt(0).toUpperCase() + selectedNode.status.slice(1)}
+            </Badge>
+          </div>
           <Dialog open={plotsOpen} onOpenChange={setPlotsOpen}>
             <DialogTrigger asChild>
               <button
@@ -98,7 +100,7 @@ export function NodeInfo() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-4">
                   <div className="rounded-full bg-gradient-to-r from-blue-400 to-blue-600 p-2 shadow-md">
-                    <Zap className="h-4 w-4 text-white" />
+                    <Gauge className="h-4 w-4 text-white" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">Motor Temperature</p>
@@ -109,7 +111,7 @@ export function NodeInfo() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-4">
                   <div className="rounded-full bg-gradient-to-r from-amber-400 to-amber-600 p-2 shadow-md">
-                    <Activity className="h-4 w-4 text-white" />
+                    <Thermometer className="h-4 w-4 text-white" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">Ambient Temperature</p>
@@ -120,7 +122,7 @@ export function NodeInfo() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-4">
                   <div className="rounded-full bg-gradient-to-r from-red-400 to-red-600 p-2 shadow-md">
-                    <Thermometer className="h-4 w-4 text-white" />
+                    <TrendingUp className="h-4 w-4 text-white" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear X</p>
@@ -131,7 +133,7 @@ export function NodeInfo() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-4">
                   <div className="rounded-full bg-gradient-to-r from-green-400 to-green-600 p-2 shadow-md">
-                    <Battery className="h-4 w-4 text-white" />
+                    <TrendingDown className="h-4 w-4 text-white" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear Y</p>
@@ -142,7 +144,7 @@ export function NodeInfo() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-4">
                   <div className="rounded-full bg-gradient-to-r from-purple-400 to-purple-600 p-2 shadow-md">
-                    <Battery className="h-4 w-4 text-white" />
+                    <Waves className="h-4 w-4 text-white" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">Linear Z</p>
@@ -158,7 +160,7 @@ export function NodeInfo() {
                   <div>
                     <p className="text-sm font-medium">Motor Current</p>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-2xl font-bold">{format2(thingSpeakData?.field6)}A</h4>
+                      <h4 className="text-2xl font-bold">{Math.abs(Number(format2(thingSpeakData?.field6)))}A</h4>
                       {Number(thingSpeakData?.field6) > 0 ? (
                         <span className="inline-block px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-300 shadow-sm"> Motor ON</span>
                       ) : (
@@ -175,7 +177,7 @@ export function NodeInfo() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">RMSE</p>
-                    <h4 className="text-2xl font-bold">6.58</h4>
+                    <h4 className="text-2xl font-bold">3.8</h4>
                   </div>
                 </CardContent>
               </Card>

@@ -6,8 +6,8 @@ const MOTOR_IMG = "/motor.png";
 const outputLabels = [
     { label: "Speed", key: "speed" },
     { label: "Vibrations", key: "vibrations" },
-    { label: "PT_motor_temp", key: "pt_motor_temp" },
-    { label: "DT_motor_temp", key: "dt_motor_temp" },
+    { label: "Physical Motor Temp", key: "pt_motor_temp" },
+    { label: "DT Motor Temp", key: "dt_motor_temp" },
 ]
 
 type MotorOutputs = {
@@ -69,7 +69,7 @@ export function MotorVisualization(props: { outputs?: MotorOutputs }) {
                         <div className="text-center text-sm mt-1">{ambientTemp} °C</div>
                     </div>
                     <div>
-                        <label className="block font-semibold mb-1">Time Duration (s)</label>
+                        <label className="block font-semibold mb-1">Time Duration (min)</label>
                         <input
                             type="range"
                             min={1}
@@ -78,7 +78,7 @@ export function MotorVisualization(props: { outputs?: MotorOutputs }) {
                             onChange={e => setDuration(Number(e.target.value))}
                             className="w-full"
                         />
-                        <div className="text-center text-sm mt-1">{duration} s</div>
+                        <div className="text-center text-sm mt-1">{duration} min</div>
                     </div>
                 </div>
                 {/* Arrow from input to motor */}
